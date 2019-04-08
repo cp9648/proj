@@ -1,0 +1,28 @@
+<header class="am-topbar am-topbar-fixed-top am-topbar-inverse">
+    <h1 class="am-topbar-brand">
+        <a href="javascript:;">文件云</a>
+    </h1>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+        <div class="am-topbar-right">
+            <ul class="am-nav am-nav-pills am-topbar-nav">
+                <!-- class="am-active" -->
+                <li><a href="javascript:;">首页</a></li>
+                <li><a href="javascript:;">项目</a></li>
+            </ul>
+            <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+                <a class="am-dropdown-toggle" href="javascript:;" data-am-dropdown-toggle>
+                    <i class="am-icon-user am-icon-fw"></i> Admin
+                    <i class="am-icon-caret-down"></i>
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="javascript:;">修改密码</a></li>
+                    <li class="am-divider"></li>
+                    <li><a href="{{ url_for('view_logout') }}">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,36 @@
+.am-dropdown-toggle {
+    position: relative;
+    display: block;
+    padding: .4em 1em;
+    border-radius: 0;
+}
+@media only screen and (min-width: 641px) {
+    .am-dropdown-toggle {
+        position: relative;
+        line-height: 50px;
+        padding: 0 10px;
+    }
+    .am-breadcrumb {
+        margin-bottom: 0;
+        display: inline-block;
+    }
+}
+.sp-refresh {
+    color: #ccc;
+    display: inline-block;
+    margin-top: 0.33em;
+    margin-right: 1em;
+}
+.path-line:hover > .sp-refresh {
+    color: #0e90d2;
+    cursor: pointer;
+}
+#user-folder-list th:first-of-type {
+    width: 1em;
+}
+input[name="file"] {
+    display: none;
+}
+.button-line {
+    margin: -0.4em auto 0.35em auto;
+}

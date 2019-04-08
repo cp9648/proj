@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    {% include "part/head-meta-link.html" ignore missing with context %}
+    <title>文件云</title>
+    <!--在这里编写你的HTML代码-->
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/upload.css" />
+    <style type="text/css"></style>
+</head>
+<body>
+    {% include "part/body-header.html" ignore missing with context %}
+
+    <div class="am-container">
+        <div class="path-line">
+            当前路径：
+            <ol class="am-breadcrumb">
+                <li><a href="javascript:;" class="am-icon-home">主目录</a></li>
+                <li><a href="javascript:;">分类</a></li>
+                <li class="am-active">内容</li>
+            </ol>
+            <span class="sp-refresh am-fr" title="刷新">
+                <i class="am-icon-refresh"></i>
+            </span>
+            <span class="am-cf"></span>
+        </div>
+        <div class="button-line">
+            <button id="btn-folder-new" type="button" class="am-btn am-btn-warning am-radius am-btn-xs">
+                <i class="am-icon-plus"></i> 新建文件夹
+            </button>
+            <!-- https://github.com/blueimp/jQuery-File-Upload/wiki/Frequently-Asked-Questions#how-to-limit-the-file-selection-so-users-can-only-select-one-file -->
+            <!-- https://github.com/blueimp/jQuery-File-Upload/wiki/Frequently-Asked-Questions#is-it-possible-to-dragdrop-a-folder-of-files -->
+            <input id="upload-file" type="file" name="file" multiple />
+            <label for="upload-file" id="btn-file-upload" class="am-btn am-btn-primary am-radius am-btn-xs">
+                <i class="am-icon-upload"></i> 上传文件
+            </label>
+            <input id="upload-folder" type="file" name="file" multiple directory webkitdirectory mozdirectory />
+            <label for="upload-folder" id="btn-folder-upload" class="am-btn am-btn-primary am-radius am-btn-xs">
+                <i class="am-icon-upload"></i> 上传文件夹
+            </label>
+        </div>
+        <!--在这里编写你的HTML代码-->
+        {% include "part/list.html" ignore missing with context %}
+        <!--底部模态框代码-->
+        {% include "part/bottom-right-modal.html" ignore missing with context %}
+    </div>
+    <script type="text/javascript">
+        // 确保GLOBAL存在
+        if(!window.GLOBAL) {
+            window.GLOBAL = {};
+        }
+        GLOBAL.USER_FOLDER_LIST_URL = "{{ url_for('view_user_folder_list') }}";
+        GLOBAL.RESUME_UPLOAD_URL = "{{ url_for('view_resume_upload') }}";
+        GLOBAL.UPLOAD_URL = "{{ url_for('view_upload') }}";
+    </script>
+    {% include "part/body-script-src.html" ignore missing with context %}
+    <!-- jQuery-File-Upload组件需要的js -->
+    <script type="text/javascript" src="/static/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="/static/lib/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="/static/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
+    <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+    <!--[if (gte IE 8)&(lt IE 10)]>
+    <script src="/static/lib/blueimp-file-upload/js/cors/jquery.xdr-transport.js"></script>
+    <![endif]-->
+    <!--在这里编写你的JS代码-->
+    <script type="text/javascript" src="/static/js/upload.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            get_folder_list();
+            bind_path_change();
+            bind_file_upload();
+            // debug
+            var $modal = $('#bottom-right-modal');
+            $modal.css({
+                'visibility': 'hidden',
+                'opacity': 0
+            });
+            $modal.on('opened.modal.amui', function() {
+                $modal.off('opened.modal.amui');
+                $('#modal-upload-title').find('[class*=am-icon-]').trigger('click');
+                $modal.animate({
+                    'opacity': 1
+                }, 250, function() {
+                    $modal.css('visibility', 'visible');
+                });
+            });
+            $modal.modal({
+                relatedTarget: this,
+                dimmer: false // 不显示遮罩
+            });
+            bind_upload_panel();
+        });
+    </script>
+</body>
+</html>

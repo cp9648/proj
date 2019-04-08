@@ -1,0 +1,9 @@
+Flask
+SQLAlchemy-Utils
+Flask-SQLAlchemy
+flask_debugtoolbar
+colorama
+termcolor
+furl
+binaryornot
+pytz
